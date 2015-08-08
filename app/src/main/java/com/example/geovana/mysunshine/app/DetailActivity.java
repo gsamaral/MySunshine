@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.R;
+import com.example.geovana.mysunshine.app.R;
+
+//import com.example.geovana.mysunshine.app.R;
 
 public class DetailActivity extends ActionBarActivity {
 
