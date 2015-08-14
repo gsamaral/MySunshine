@@ -42,6 +42,7 @@ public class ForecastFragment extends Fragment {
     public ForecastFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,8 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.forecastfragment, menu);
+
+
     }
 
     @Override
@@ -102,8 +105,7 @@ public class ForecastFragment extends Fragment {
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
         weatherTask.execute(location);
     }
 
@@ -120,7 +122,7 @@ public class ForecastFragment extends Fragment {
         /* The date/time conversion code is going to be moved outside the asynctask later,
          * so for convenience we're breaking it out into its own method now.
          */
-        private String getReadableDateString(long time){
+        private String getReadableDateString(long time) {
             // Because the API returns a unix timestamp (measured in seconds),
             // it must be converted to milliseconds in order to be converted to valid date.
             SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
@@ -134,7 +136,7 @@ public class ForecastFragment extends Fragment {
             if (unitType.equals(getString(R.string.pref_units_imperial))) {
                 high = (high * 1.8) + 32;
                 low = (low * 1.8) + 32;
-                } else if (!unitType.equals(getString(R.string.pref_units_metric))) {
+            } else if (!unitType.equals(getString(R.string.pref_units_metric))) {
                 Log.d(LOG_TAG, "Unit type not found: " + unitType);
             }
             // For presentation, assume the user doesn't care about tenths of a degree.
@@ -148,7 +150,7 @@ public class ForecastFragment extends Fragment {
         /**
          * Take the String representing the complete forecast in JSON Format and
          * pull out the data we need to construct the Strings needed for the wireframes.
-         *
+         * <p/>
          * Fortunately parsing is easy:  constructor takes the JSON string and converts it
          * into an Object hierarchy for us.
          */
@@ -190,12 +192,12 @@ public class ForecastFragment extends Fragment {
             // change this option without us having to re-fetch the data once
             // we start storing the values in a database.
             SharedPreferences sharedPrefs =
-            PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    PreferenceManager.getDefaultSharedPreferences(getActivity());
             String unitType = sharedPrefs.getString(
-            getString(R.string.pref_units_key),
-            getString(R.string.pref_units_metric));
+                    getString(R.string.pref_units_key),
+                    getString(R.string.pref_units_metric));
 
-            for(int i = 0; i < weatherArray.length(); i++) {
+            for (int i = 0; i < weatherArray.length(); i++) {
                 // For now, using the format "Day, description, hi/low"
                 String day;
                 String description;
@@ -209,7 +211,7 @@ public class ForecastFragment extends Fragment {
                 // "this saturday".
                 long dateTime;
                 // Cheating to convert this to UTC time, which is what we want anyhow
-                dateTime = dayTime.setJulianDay(julianStartDay+i);
+                dateTime = dayTime.setJulianDay(julianStartDay + i);
                 day = getReadableDateString(dateTime);
 
                 // description is in a child array called "weather", which is 1 element long.
@@ -228,6 +230,7 @@ public class ForecastFragment extends Fragment {
             return resultStrs;
 
         }
+
         @Override
         protected String[] doInBackground(String... params) {
 
@@ -328,7 +331,7 @@ public class ForecastFragment extends Fragment {
         protected void onPostExecute(String[] result) {
             if (result != null) {
                 mForecastAdapter.clear();
-                for(String dayForecastStr : result) {
+                for (String dayForecastStr : result) {
                     mForecastAdapter.add(dayForecastStr);
                 }
                 // New data is back from the server.  Hooray!
