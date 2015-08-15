@@ -10,7 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.geovana.mysunshine.app.data.WeatherContract.LocationEntry;
 import com.example.geovana.mysunshine.app.data.WeatherContract.WeatherEntry;
 
-
+//kenAgo
+//Geofense
+//content provider
 
 /**
  * Manages a local database for weather data.
@@ -18,7 +20,7 @@ import com.example.geovana.mysunshine.app.data.WeatherContract.WeatherEntry;
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 2;//
 
     static final String DATABASE_NAME = "weather.db";
 
